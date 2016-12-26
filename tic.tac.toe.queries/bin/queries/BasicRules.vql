@@ -1,0 +1,43 @@
+package queries
+import "http://example.com/tictactoe";
+
+pattern markCenter(square : Square, engine : Engine) {
+	Engine.square(engine, square);
+	Square.pos_x(square, 0);
+	Square.pos_y(square, 0);
+	neg find markOnSquare(_, square, engine);
+}
+
+pattern oppositeXCorner(square : Square, engine : Engine){
+	Engine.square(engine, square);
+	find corners(square, engine);
+	
+	neg find markOnSquare(_,square, engine);
+	find corners(squareX, engine);
+	neg find markOnSquare(markX,squareX, engine);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black,markX);
+	Square.pos_x(square, pos_x);
+	Square.pos_x(squareX, posX_x);
+	Square.pos_y(square, pos_y);
+	Square.pos_y(squareX, posX_y);
+	
+	check(pos_x == -1*posX_x);
+	check(pos_y == -1*posX_y);
+}
+
+pattern emptySides(square : Square, engine : Engine){
+	Engine.square(engine, square);
+	Square.pos_x(square, pos_x);
+	check(pos_x == 1 || pos_x == -1);
+	cntNorth == count find TCNorthWithEmptyMarks(square,_, engine);
+	cntSouth == count find TCSouthWithEmptyMarks(square,_, engine);
+	check(cntNorth + cntSouth == 3);
+}or{
+	Engine.square(engine, square);
+	Square.pos_y(square, pos_y);
+	check(pos_y == 1 || pos_y == -1);
+	cntEast == count find TCEastWithEmptyMarks(square,_, engine);
+	cntWest == count find TCWestWithEmptyMarks(square,_, engine);
+	check(cntEast + cntWest == 3);
+}

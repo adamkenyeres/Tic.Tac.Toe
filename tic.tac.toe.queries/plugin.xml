@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="extension.derived.queries.W" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="W" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.E" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="E" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.NW" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="NW" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.N" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="N" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.SW" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="SW" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.NE" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="NE" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.SE" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="SE" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.mark" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="mark" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.square" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Mark" feature-name="square" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="extension.derived.queries.S" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Square" feature-name="S" package-nsUri="http://example.com/tictactoe"/>
+  </extension>
+  <extension id="queries.Rules" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Rules" id="queries.Rules">
+      <query-specification fqn="queries.XMoves"/>
+      <query-specification fqn="queries.OMoves"/>
+    </group>
+  </extension>
+  <extension id="queries.RulesWinning" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.RulesWinning" id="queries.RulesWinning">
+      <query-specification fqn="queries.XWinningVertical"/>
+      <query-specification fqn="queries.XWinningHorizontal"/>
+      <query-specification fqn="queries.XWinningDiagonalLeft"/>
+      <query-specification fqn="queries.XWinningDiagonalRight"/>
+      <query-specification fqn="queries.OWinningVertical"/>
+      <query-specification fqn="queries.OWinningHorizontal"/>
+      <query-specification fqn="queries.OWinningDiagonalLeft"/>
+      <query-specification fqn="queries.OWinningDiagonalRight"/>
+      <query-specification fqn="queries.XWinning"/>
+      <query-specification fqn="queries.OWinning"/>
+    </group>
+  </extension>
+  <extension id="queries.ForkO" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.ForkO" id="queries.ForkO">
+      <query-specification fqn="queries.OFork"/>
+    </group>
+  </extension>
+  <extension id="queries.TransitiveClosure" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.TransitiveClosure" id="queries.TransitiveClosure">
+      <query-specification fqn="queries.TCNorth"/>
+      <query-specification fqn="queries.TCSouth"/>
+      <query-specification fqn="queries.TCEast"/>
+      <query-specification fqn="queries.TCWest"/>
+      <query-specification fqn="queries.TCNorhtWest"/>
+      <query-specification fqn="queries.TCSouthWest"/>
+      <query-specification fqn="queries.TCNorthEast"/>
+      <query-specification fqn="queries.TCSouthEast"/>
+      <query-specification fqn="queries.TCNorthWithSameMarks"/>
+      <query-specification fqn="queries.TCNorthEastWithSameMarks"/>
+      <query-specification fqn="queries.TCEastWithSameMarks"/>
+      <query-specification fqn="queries.TCSouthEastWithSameMarks"/>
+      <query-specification fqn="queries.TCSouthWithSameMarks"/>
+      <query-specification fqn="queries.TCSouthWestWithSameMarks"/>
+      <query-specification fqn="queries.TCWestWithSameMarks"/>
+      <query-specification fqn="queries.TCNorthWestWithSameMarks"/>
+      <query-specification fqn="queries.TCNorthWithEmptyMarks"/>
+      <query-specification fqn="queries.TCSouthWithEmptyMarks"/>
+      <query-specification fqn="queries.TCEastWithEmptyMarks"/>
+      <query-specification fqn="queries.TCWestWithEmptyMarks"/>
+    </group>
+  </extension>
+  <extension id="queries.QueryBasedFeatures" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.QueryBasedFeatures" id="queries.QueryBasedFeatures">
+      <query-specification fqn="queries.North"/>
+      <query-specification fqn="queries.East"/>
+      <query-specification fqn="queries.SouthEast"/>
+      <query-specification fqn="queries.SouthWest"/>
+      <query-specification fqn="queries.markOnSquare"/>
+      <query-specification fqn="queries.E"/>
+      <query-specification fqn="queries.NE"/>
+      <query-specification fqn="queries.N"/>
+      <query-specification fqn="queries.NW"/>
+      <query-specification fqn="queries.W"/>
+      <query-specification fqn="queries.SW"/>
+      <query-specification fqn="queries.S"/>
+      <query-specification fqn="queries.SE"/>
+      <query-specification fqn="queries.square"/>
+      <query-specification fqn="queries.mark"/>
+    </group>
+  </extension>
+  <extension id="queries.ForkX" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.ForkX" id="queries.ForkX">
+      <query-specification fqn="queries.XFork"/>
+    </group>
+  </extension>
+  <extension id="queries.MovesRule" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.MovesRule" id="queries.MovesRule">
+      <query-specification fqn="queries.OTwoMovesFromWinningVertical"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningHorizontal"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningDiagonalLeft"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningDiagonalRight"/>
+      <query-specification fqn="queries.oTwoMovesFromWinning"/>
+      <query-specification fqn="queries.forceOWin"/>
+      <query-specification fqn="queries.corners"/>
+      <query-specification fqn="queries.preventXForkByForcingWin"/>
+      <query-specification fqn="queries.markCenter"/>
+    </group>
+  </extension>
+  <extension id="queries.BasicRules" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.BasicRules" id="queries.BasicRules">
+      <query-specification fqn="queries.markCenter"/>
+      <query-specification fqn="queries.oppositeXCorner"/>
+      <query-specification fqn="queries.emptySides"/>
+    </group>
+  </extension>
+  <extension id="queries.TwoMovesFromWinning" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.TwoMovesFromWinning" id="queries.TwoMovesFromWinning">
+      <query-specification fqn="queries.OTwoMovesFromWinningVertical"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningHorizontal"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningDiagonalLeft"/>
+      <query-specification fqn="queries.OTwoMovesFromWinningDiagonalRight"/>
+      <query-specification fqn="queries.oTwoMovesFromWinning"/>
+      <query-specification fqn="queries.forceOWin"/>
+      <query-specification fqn="queries.corners"/>
+      <query-specification fqn="queries.preventXForkByForcingWin"/>
+    </group>
+  </extension>
+</plugin>

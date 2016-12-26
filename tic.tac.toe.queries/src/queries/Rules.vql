@@ -1,0 +1,12 @@
+package queries
+import "http://example.com/tictactoe"
+
+pattern XMoves(square : Square, engine : Engine){
+	Engine.square(engine, square);
+	neg find markOnSquare(_,square,engine);
+}
+
+pattern OMoves(square : Square, engine : Engine){
+	Engine.square(engine, square);
+	neg find markOnSquare(_,square,engine);
+}

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: tic.tac.toe.queries
+Bundle-SymbolicName: tic.tac.toe.queries;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Export-Package: queries,
+ queries.util
+Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
+ org.eclipse.emf.ecore,
+ org.eclipse.viatra.query.runtime,
+ org.eclipse.xtext.xbase.lib,
+ tic.tac.toe.model;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.apache.log4j

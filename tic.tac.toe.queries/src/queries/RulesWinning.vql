@@ -1,0 +1,110 @@
+package queries
+import "http://example.com/tictactoe"
+
+pattern XWinningVertical(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNorth == count find TCNorthWithSameMarks(square,_,color);
+	cntSouth  == count find TCSouthWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNorth+cntSouth == 2);
+	Engine.blackPlayer(engine,black);
+	Player.marks(black,mark);
+	Mark.color(mark, color);
+}
+
+pattern XWinningHorizontal(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntEast == count find TCEastWithSameMarks(square,_,color);
+	cntWest  == count find TCWestWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntEast + cntWest == 2);
+	Engine.blackPlayer(engine,black);
+	Player.marks(black,mark);
+	Mark.color(mark, color);
+}
+
+pattern XWinningDiagonalLeft(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNW == count find TCNorthWestWithSameMarks(square,_,color);
+	cntSE  == count find TCSouthEastWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNW+cntSE == 2);
+	Engine.blackPlayer(engine,black);
+	Player.marks(black,mark);
+	Mark.color(mark, color);
+}
+
+pattern XWinningDiagonalRight(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNE == count find TCNorthEastWithSameMarks(square,_,color);
+	cntSW  == count find TCSouthWestWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNE + cntSW == 2);
+	Engine.blackPlayer(engine,black);
+	Player.marks(black,mark);
+	Mark.color(mark, color);
+}
+
+pattern OWinningVertical(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNorth == count find TCNorthWithSameMarks(square,_,color);
+	cntSouth  == count find TCSouthWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNorth+cntSouth == 2);
+	Engine.whitePlayer(engine,white);
+	Player.marks(white,mark);
+	Mark.color(mark, color);
+}
+
+pattern OWinningHorizontal(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntEast == count find TCEastWithSameMarks(square,_,color);
+	cntWest  == count find TCWestWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntEast + cntWest == 2);
+	Engine.whitePlayer(engine,white);
+	Player.marks(white,mark);
+	Mark.color(mark, color);
+}
+
+pattern OWinningDiagonalLeft(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNW == count find TCNorthWestWithSameMarks(square,_,color);
+	cntSE  == count find TCSouthEastWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNW+cntSE == 2);
+	Engine.whitePlayer(engine,white);
+	Player.marks(white,mark);
+	Mark.color(mark, color);
+}
+
+pattern OWinningDiagonalRight(square : Square,engine : Engine, color : Color){
+	Engine.square(engine,square);
+	cntNE == count find TCNorthEastWithSameMarks(square,_,color);
+	cntSW  == count find TCSouthWestWithSameMarks(square,_,color);
+	neg find markOnSquare(_,square, engine);
+	check(cntNE + cntSW == 2);
+	Engine.whitePlayer(engine,white);
+	Player.marks(white,mark);
+	Mark.color(mark, color);
+}
+
+pattern XWinning(square : Square,eng : Engine, color : Color){
+	find  XWinningDiagonalLeft(square,eng,color);
+}or{
+	find XWinningDiagonalRight(square,eng,color);
+}or{
+	find XWinningHorizontal(square,eng,color);
+}or{
+	find XWinningVertical(square,eng,color);
+}
+
+pattern OWinning(square : Square,engine : Engine, color : Color){
+	find  OWinningDiagonalLeft(square,engine,color);
+}or{
+	find OWinningDiagonalRight(square,engine,color);
+}or{
+	find OWinningHorizontal(square,engine,color);
+}or{
+	find OWinningVertical(square,engine,color);
+}

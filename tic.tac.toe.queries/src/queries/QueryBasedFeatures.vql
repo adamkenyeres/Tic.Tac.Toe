@@ -1,0 +1,100 @@
+package queries
+import "http://example.com/tictactoe"
+
+pattern North(squareS : Square, squareN : Square, engine : Engine){
+	Engine.square(engine,squareN);
+	Square.pos_x(squareN,pos_x);
+	Square.pos_x(squareS,pos_x);
+	Square.pos_y(squareS, pos_S_y);
+	Square.pos_y(squareN, pos_N_y);
+	check(pos_N_y == pos_S_y + 1);
+}
+
+pattern East(squareW : Square, squareE : Square, engine : Engine){
+	Engine.square(engine,squareW);
+	Square.pos_x(squareW,pos_W_x);
+	Square.pos_x(squareE,pos_E_x);
+	Square.pos_y(squareW, pos_W_y);
+	Square.pos_y(squareE, pos_W_y);
+	check(pos_E_x == pos_W_x + 1);
+}
+
+pattern SouthEast(squareN : Square, squareS : Square, engine : Engine){
+	Engine.square(engine,squareN);
+	Engine.square(engine,squareS);
+	Square.pos_x(squareN,pos_N_x);
+	Square.pos_x(squareS,pos_S_x);
+	Square.pos_y(squareN, pos_N_y);
+	Square.pos_y(squareS, pos_S_y);
+	check(pos_N_y == pos_S_y + 1);
+	check(pos_S_x == pos_N_x + 1);
+}
+
+pattern SouthWest(squareN : Square, squareS : Square, engine : Engine){
+	Engine.square(engine,squareN);
+	Engine.square(engine,squareS);
+	Square.pos_x(squareN,pos_N_x);
+	Square.pos_x(squareS,pos_S_x);
+	Square.pos_y(squareN, pos_N_y);
+	Square.pos_y(squareS, pos_S_y);
+	check(pos_N_y == pos_S_y + 1);
+	check(pos_N_x == pos_S_x + 1);
+}
+
+pattern markOnSquare(mark : Mark, square : Square, engine : Engine){
+	Engine.square(engine, square);
+	Square.pos_x(square, pos_x);
+	Square.pos_y(square, pos_y);
+	Mark.pos_x(mark, pos_x);
+	Mark.pos_y(mark, pos_y);
+}
+
+@QueryBasedFeature
+pattern E(source:Square, target:Square){
+	find East(source, target, _);
+}
+
+@QueryBasedFeature
+pattern NE(source:Square, target:Square){
+	find SouthWest(target, source, _);
+}
+
+@QueryBasedFeature
+pattern N(source:Square, target:Square){
+	find North(source, target, _);
+}
+
+@QueryBasedFeature
+pattern NW(source:Square, target:Square){
+	find SouthEast(target, source, _);
+}
+
+@QueryBasedFeature
+pattern W(source:Square, target:Square){
+	find East(target, source, _);
+}
+
+@QueryBasedFeature
+pattern SW(source:Square, target:Square){
+	find SouthWest(source, target, _);
+}
+
+@QueryBasedFeature
+pattern S(source:Square, target:Square){
+	find North(target,source, _);
+}
+
+@QueryBasedFeature
+pattern SE(source:Square, target:Square){
+	find SouthEast(source, target, _);
+}
+
+@QueryBasedFeature
+pattern square(source : Mark, target : Square, engine : Engine){
+	find markOnSquare(source, target, engine);
+}
+
+@QueryBasedFeature
+pattern mark(source : Square, target : Mark, engine : Engine){
+	find markOnSquare(target, source, engine);
+}

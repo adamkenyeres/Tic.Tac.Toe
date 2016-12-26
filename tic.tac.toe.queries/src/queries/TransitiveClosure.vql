@@ -1,0 +1,115 @@
+package queries
+
+import "http://example.com/tictactoe"
+
+pattern TCNorth(s1 : Square, s2 : Square) {
+	find N +(s1, s2);
+}
+
+pattern TCSouth(s1 : Square, s2 : Square) { // Returns all the south squares
+	find S +(s1, s2);
+}
+
+pattern TCEast(s1 : Square, s2 : Square) {
+	find E +(s1, s2);
+}
+
+pattern TCWest(s1 : Square, s2 : Square) {
+	find W +(s1, s2);
+}
+
+pattern TCNorhtWest(s1 : Square, s2 : Square) {
+	find NW +(s1, s2);
+}
+
+pattern TCSouthWest(s1 : Square, s2 : Square) {
+	find SW +(s1, s2);
+}
+
+pattern TCNorthEast(s1 : Square, s2 : Square) {
+	find NE +(s1, s2);
+}
+
+pattern TCSouthEast(s1 : Square, s2 : Square) {
+	find SE +(s1, s2);
+}
+
+pattern TCNorthWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find TCNorth(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCNorthEastWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find NE +(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCEastWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find TCEast(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCSouthEastWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find SE +(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCSouthWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find TCSouth(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCSouthWestWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find SW +(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCWestWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find TCWest(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCNorthWestWithSameMarks(s1 : Square, s2 : Square, color : Color) {
+	find NW +(s1, s2);
+	find markOnSquare(mark, s2, _);
+	Mark.color(mark, color);
+}
+
+pattern TCNorthWithEmptyMarks(s1 : Square, s2 : Square, engine : Engine) {
+	Engine.square(engine, s1);
+	Engine.square(engine, s2);
+	find TCNorth(s1, s2);
+	neg find markOnSquare(_, s2, engine);
+	neg find markOnSquare(_, s1, engine);
+}
+
+pattern TCSouthWithEmptyMarks(s1 : Square, s2 : Square, engine : Engine) {
+	Engine.square(engine, s1);
+	Engine.square(engine, s2);
+	find TCSouth(s1, s2);
+	neg find markOnSquare(_, s2, engine);
+	neg find markOnSquare(_, s1, engine);
+}
+
+pattern TCEastWithEmptyMarks(s1 : Square, s2 : Square, engine : Engine) {
+	Engine.square(engine, s1);
+	Engine.square(engine, s2);
+	find TCEast(s1, s2);
+	neg find markOnSquare(_, s2, engine);
+	neg find markOnSquare(_, s1, engine);
+}
+
+pattern TCWestWithEmptyMarks(s1 : Square, s2 : Square, engine : Engine) {
+	Engine.square(engine, s1);
+	Engine.square(engine, s2);
+	find TCWest(s1, s2);
+	neg find markOnSquare(_, s2, engine);
+	neg find markOnSquare(_, s1, engine);
+}

@@ -1,0 +1,163 @@
+package queries
+
+import "http://example.com/tictactoe"
+
+pattern XFork(square : Square, engine : Engine) {
+	Engine.square(engine, square);
+	neg find markOnSquare(_, square, engine);
+
+	cntXNorth == count find TCNorthWithSameMarks(square, _, colorX);
+	cntXSouth == count find TCSouthWithSameMarks(square, _, colorX);
+	cntXEast == count find TCEastWithSameMarks(square, _, colorX);
+	cntXWest == count find TCWestWithSameMarks(square, _, colorX);
+
+//	cntNorthSquares == count find TCNorth(square, _);
+//	cntSouthSquares == count find TCSouth(square, _);
+//	cntEastSquares == count find TCEast(square, _);
+//	cntWestSquares == count find TCWest(square, _);
+//	check(cntNorthSquares + cntSouthSquares == 2);
+//	check(cntEastSquares + cntWestSquares == 2);
+
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+	cntONorth == count find TCNorthWithSameMarks(square, _, colorO);
+	cntOSouth == count find TCSouthWithSameMarks(square, _, colorO);
+	cntOEast == count find TCEastWithSameMarks(square, _, colorO);
+	cntOWest == count find TCWestWithSameMarks(square, _, colorO);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, colorO);
+
+	check(cntXNorth + cntXSouth > 0);
+	check(cntONorth + cntOSouth < 1);
+	check(cntXEast + cntXWest > 0);
+	check(cntOEast + cntOWest < 1);
+
+} or {
+	Engine.square(engine, square);
+	neg find markOnSquare(_, square, engine);
+
+	cntXNorth == count find TCNorthWithSameMarks(square, _, colorX);
+	cntXSouth == count find TCSouthWithSameMarks(square, _, colorX);
+	cntXNW == count find TCNorthWestWithSameMarks(square, _, colorX);
+	cntXSE == count find TCSouthEastWithSameMarks(square, _, colorX);
+
+	cntNorthSquares == count find TCNorth(square, _);
+	cntSouthSquares == count find TCSouth(square, _);
+	cntNWSquares == count find TCNorhtWest(square, _);
+	cntSESquares == count find TCSouthEast(square, _);
+	check(cntNorthSquares + cntSouthSquares == 2);
+	check(cntNWSquares + cntSESquares == 2);
+
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+	cntONorth == count find TCNorthWithSameMarks(square, _, colorO);
+	cntOSouth == count find TCSouthWithSameMarks(square, _, colorO);
+	cntONW == count find TCNorthWestWithSameMarks(square, _, colorO);
+	cntOSE == count find TCSouthEastWithSameMarks(square, _, colorO);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, colorO);
+
+	check(cntXNorth + cntXSouth >= 1);
+	check(cntXNW + cntXSE >= 1);
+	check(cntONW + cntOSE == 0);
+	check(cntONorth + cntOSouth == 0);
+} or {
+	Engine.square(engine, square);
+	neg find markOnSquare(_, square, engine);
+	cntXNorth == count find TCNorthWithSameMarks(square, _, colorX);
+	cntXSouth == count find TCSouthWithSameMarks(square, _, colorX);
+	cntXNE == count find TCNorthEastWithSameMarks(square, _, colorX);
+	cntXSW == count find TCSouthWestWithSameMarks(square, _, colorX);
+
+	cntNorthSquares == count find TCNorth(square, _);
+	cntSouthSquares == count find TCSouth(square, _);
+	cntNEquares == count find TCNorthEast(square, _);
+	cntSWSquares == count find TCSouthWest(square, _);
+	check(cntNorthSquares + cntSouthSquares == 2);
+	check(cntNEquares + cntSWSquares == 2);
+
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+	cntONorth == count find TCNorthWithSameMarks(square, _, colorO);
+	cntOSouth == count find TCSouthWithSameMarks(square, _, colorO);
+	cntONE == count find TCNorthEastWithSameMarks(square, _, colorO);
+	cntOSW == count find TCSouthWestWithSameMarks(square, _, colorO);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, colorO);
+
+	check(cntXNorth + cntXSouth >= 1);
+	check(cntXNE + cntXSW >= 1);
+	check(cntONE + cntOSW == 0);
+	check(cntONorth + cntOSouth == 0);
+} or {
+	Engine.square(engine, square);
+	neg find markOnSquare(_, square, engine);
+	cntXWest == count find TCWestWithSameMarks(square, _, colorX);
+	cntXEast == count find TCEastWithSameMarks(square, _, colorX);
+	cntXNE == count find TCNorthEastWithSameMarks(square, _, colorX);
+	cntXSW == count find TCSouthWestWithSameMarks(square, _, colorX);
+
+	cntWestSquares == count find TCWest(square, _);
+	cntEastSquares == count find TCEast(square, _);
+	cntNEquares == count find TCNorthEast(square, _);
+	cntSWSquares == count find TCSouthWest(square, _);
+	check(cntWestSquares + cntEastSquares == 2);
+	check(cntNEquares + cntSWSquares == 2);
+
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+	cntOWest == count find TCNorthWithSameMarks(square, _, colorO);
+	cntOEast == count find TCSouthWithSameMarks(square, _, colorO);
+	cntONE == count find TCNorthEastWithSameMarks(square, _, colorO);
+	cntOSW == count find TCSouthWestWithSameMarks(square, _, colorO);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, colorO);
+
+	check(cntXWest + cntXEast >= 1);
+	check(cntXNE + cntXSW >= 1);
+	check(cntONE + cntOSW == 0);
+	check(cntOEast + cntOWest == 0);
+} or {
+	Engine.square(engine, square);
+	neg find markOnSquare(_, square, engine);
+	cntXWest == count find TCWestWithSameMarks(square, _, colorX);
+	cntXEast == count find TCEastWithSameMarks(square, _, colorX);
+	cntXNW == count find TCNorthWestWithSameMarks(square, _, colorX);
+	cntXSE == count find TCSouthEastWithSameMarks(square, _, colorX);
+
+	cntWestSquares == count find TCWest(square, _);
+	cntEastSquares == count find TCEast(square, _);
+	cntNWSquares == count find TCNorhtWest(square, _);
+	cntSESquares == count find TCSouthEast(square, _);
+	check(cntWestSquares + cntEastSquares == 2);
+	check(cntNWSquares + cntSESquares == 2);
+
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+	cntOWest == count find TCNorthWithSameMarks(square, _, colorO);
+	cntOEast == count find TCSouthWithSameMarks(square, _, colorO);
+	cntONW == count find TCNorthWestWithSameMarks(square, _, colorO);
+	cntOSE == count find TCSouthEastWithSameMarks(square, _, colorO);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, colorO);
+
+	check(cntXWest + cntXEast >= 1);
+	check(cntXNW + cntXSE >= 1);
+	check(cntONW + cntOSE == 0);
+	check(cntOEast + cntOWest == 0);
+}

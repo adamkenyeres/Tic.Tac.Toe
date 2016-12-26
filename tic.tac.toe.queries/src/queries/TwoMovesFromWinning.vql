@@ -1,0 +1,137 @@
+package queries
+
+import "http://example.com/tictactoe";
+pattern
+OTwoMovesFromWinningVertical(square : Square, engine : Engine, color : Color) {
+	Engine.square(engine, square);
+	cntONorth == count find TCNorthWithSameMarks(square, _, color);
+	cntOSouth == count find TCSouthWithSameMarks(square, _, color);
+	neg find markOnSquare(_, square, engine);
+	check(cntONorth + cntOSouth == 1);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, color);
+
+	cntXNorth == count find TCNorthWithSameMarks(square, _, colorX);
+	cntXSouth == count find TCSouthWithSameMarks(square, _, colorX);
+	neg find markOnSquare(_, square, engine);
+	check(cntXNorth + cntXSouth == 0);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+}
+
+pattern
+OTwoMovesFromWinningHorizontal(square : Square, engine : Engine, color : Color) {
+	Engine.square(engine, square);
+	cntOEast == count find TCEastWithSameMarks(square, _, color);
+	cntOWest == count find TCWestWithSameMarks(square, _, color);
+	neg find markOnSquare(_, square, engine);
+	check(cntOEast + cntOWest == 1);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, mark);
+	Mark.color(mark, color);
+
+	cntXEast == count find TCEastWithSameMarks(square, _, colorX);
+	cntXWest == count find TCWestWithSameMarks(square, _, colorX);
+	neg find markOnSquare(_, square, engine);
+	check(cntXEast + cntXWest == 0);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+}
+
+pattern
+OTwoMovesFromWinningDiagonalLeft(square : Square, engine : Engine, color : Color) {
+	Engine.square(engine, square);
+	cntONW == count find TCNorthWestWithSameMarks(square, _, color);
+	cntOSE == count find TCSouthEastWithSameMarks(square, _, color);
+	neg find markOnSquare(_, square, engine);
+	check(cntONW + cntOSE == 1);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, color);
+
+	cntXNW == count find TCNorthWestWithSameMarks(square, _, colorX);
+	cntXSE == count find TCSouthEastWithSameMarks(square, _, colorX);
+	neg find markOnSquare(_, square, engine);
+	check(cntXNW + cntXSE == 0);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+}
+
+pattern
+OTwoMovesFromWinningDiagonalRight(square : Square, engine : Engine, color : Color) {
+	Engine.square(engine, square);
+	cntONE == count find TCNorthEastWithSameMarks(square, _, color);
+	cntOSW == count find TCSouthWestWithSameMarks(square, _, color);
+	neg find markOnSquare(_, square, engine);
+	check(cntONE + cntOSW == 1);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markO);
+	Mark.color(markO, color);
+
+	cntXNE == count find TCNorthEastWithSameMarks(square, _, colorX);
+	cntXSW == count find TCSouthWestWithSameMarks(square, _, colorX);
+	neg find markOnSquare(_, square, engine);
+	check(cntXNE + cntXSW == 0);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markX);
+	Mark.color(markX, colorX);
+
+}
+
+pattern
+oTwoMovesFromWinning(square : Square, engine : Engine, color : Color) {
+	find OTwoMovesFromWinningHorizontal(square, engine, color);
+} or {
+//	find OTwoMovesFromWinningDiagonalRight(square, engine, color);
+//} or {
+//	find OTwoMovesFromWinningDiagonalLeft(square, engine, color);
+//}or{
+	find OTwoMovesFromWinningVertical(square, engine, color);
+}
+
+pattern forceOWin(square : Square, engine : Engine, color : Color) {
+	find oTwoMovesFromWinning(square, engine, color);
+}
+
+pattern corners(square : Square, engine : Engine) {
+	Engine.square(engine, square);
+	Square.pos_x(square, pos_x);
+	Square.pos_y(square, pos_y);
+	check((pos_y == 1 || pos_y == - 1)
+	&&(pos_x == 1 || pos_x == - 1));
+}
+
+pattern
+preventXForkByForcingWin(square : Square, engine : Engine, color : Color) {
+	find corners(squareCorner1, engine);
+	find corners(squareCorner2, engine);
+
+	Square.pos_x(squareCorner1, pos1_x);
+	Square.pos_x(squareCorner2, pos2_x);
+	Square.pos_y(squareCorner2, pos2_y);
+	Square.pos_y(squareCorner1, pos1_y);
+	//Oposite Corners
+	check((pos1_x == pos2_x * - 1)
+	&&(pos1_y == pos2_y * - 1));
+
+	find markOnSquare(markCorner1, squareCorner1, engine);
+	find markOnSquare(markCorner2, squareCorner2, engine);
+	Engine.blackPlayer(engine, black);
+	Player.marks(black, markCorner1);
+	Mark.color(markCorner1, colorX);
+	Mark.color(markCorner2, colorX);
+
+	find markOnSquare(markCenter, squareCenter, engine);
+	Square.pos_x(squareCenter, posCenter_x);
+	Square.pos_y(squareCenter, posCenter_y);
+	check(posCenter_x == 0 && posCenter_y == 0);
+	Engine.whitePlayer(engine, white);
+	Player.marks(white, markCenter);
+
+	find forceOWin(square, engine, color);
+}
+
